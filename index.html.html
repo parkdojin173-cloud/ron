@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mazan — A Biological Celebration</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+:root{
+  --cream:#faf6ec;
+  --paper:#fffdf7;
+  --paper2:#f6efdf;
+  --green:#426b4c;
+  --deep:#274735;
+  --sage:#91a58d;
+  --olive:#a8b39a;
+  --brown:#806e58;
+  --rose:#c88e8e;
+  --gold:#c6a967;
+  --ink:#4f5b51;
+  --shadow:rgba(38,57,43,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:"DM Sans",sans-serif;color:var(--ink);background:var(--cream)}
+button{font-family:inherit}
+
+/* ---------- STAGE ---------- */
+.stage{
+  position:relative;width:100vw;height:100svh;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 42%,#fffdf8 0,#faf6ec 62%,#eee5d4 100%);
+}
+.book-shadow{
+  position:absolute;left:50%;top:50%;width:min(920px,92vw);height:min(720px,88vh);
+  transform:translate(-50%,-50%);
+  background:rgba(80,75,57,.08);filter:blur(28px);border-radius:30px;
+}
+.page{
+  position:absolute;inset:0;perspective:1600px;pointer-events:none;
+}
+.sheet{
+  position:absolute;inset:0;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;backface-visibility:hidden;
+  box-shadow:0 12px 45px var(--shadow);
+  transform-style:preserve-3d;
+  pointer-events:auto;
+}
+.sheet:before{
+  content:"";position:absolute;inset:12px;border:1px solid rgba(66,107,76,.09);
+  pointer-events:none;
+}
+.page-cover{z-index:8}
+.page-two{z-index:7}
+.page-three{z-index:6}
+.page-four{z-index:5}
+.page-five{z-index:4}
+
+/* different folding styles */
+.fold-right .sheet{transform-origin:right center;transition:transform 1.05s cubic-bezier(.77,0,.18,1)}
+.fold-left .sheet{transform-origin:left center;transition:transform 1.05s cubic-bezier(.77,0,.18,1)}
+.fold-center .sheet{transform-origin:center center;transition:transform 1.1s cubic-bezier(.77,0,.18,1)}
+.fold-up .sheet{transform-origin:center bottom;transition:transform 1.05s cubic-bezier(.77,0,.18,1)}
+
+.fold-right.flipped .sheet{transform:rotateY(180deg)}
+.fold-left.flipped .sheet{transform:rotateY(-180deg)}
+.fold-center.flipped .sheet{transform:rotateY(180deg) scale(.03)}
+.fold-up.flipped .sheet{transform:rotateX(88deg) translateY(-25%)}
+
+.fold-right .sheet:after,.fold-left .sheet:after,.fold-center .sheet:after,.fold-up .sheet:after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,rgba(30,45,33,.13),transparent 20%,transparent 80%,rgba(30,45,33,.08));
+  transition:opacity .55s;
+}
+.flipped .sheet:after{opacity:.8}
+
+.content{width:min(700px,88vw);text-align:center;position:relative;z-index:3}
+.caveat{font-family:"Caveat",cursive}
+.serif{font-family:"Playfair Display",serif}
+
+.corner{
+  position:absolute;font-size:20px;color:var(--gold);opacity:.7;
+  animation:twinkle 2.5s ease-in-out infinite;
+}
+@keyframes twinkle{50%{transform:scale(1.2) rotate(15deg);opacity:1}}
+
+.leaf{
+  position:absolute;width:130px;opacity:.42;
+}
+.leaf path{fill:none;stroke:var(--green);stroke-width:1.5;stroke-linecap:round}
+.leaf ellipse{fill:#dce6d7;stroke:var(--green);stroke-width:1.2}
+
+.next-button{
+  position:absolute;z-index:20;bottom:28px;left:50%;transform:translateX(-50%);
+  border:1px solid var(--green);background:rgba(255,253,247,.94);
+  color:var(--green);border-radius:999px;padding:12px 22px;
+  cursor:pointer;font-size:12px;letter-spacing:.3px;
+  box-shadow:0 5px 18px rgba(50,70,52,.08);
+  transition:.25s;
+}
+.next-button:hover{background:var(--green);color:#fff;transform:translateX(-50%) translateY(-2px)}
+.back-button{
+  position:absolute;z-index:20;bottom:29px;left:25px;
+  border:0;background:none;color:var(--sage);cursor:pointer;font-size:12px;
+}
+.page-count{
+  position:absolute;right:25px;bottom:30px;color:#aaa08c;
+  font:15px "Caveat",cursive;letter-spacing:2px;
+}
+
+/* ---------- PAGE 1 ---------- */
+.cover{
+  background:radial-gradient(circle at 50% 45%,#fffef9,#faf6ec 70%,#eee5d4);
+}
+.cover .eyebrow{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--sage);
+  margin-bottom:26px;
+}
+.cover .tiny-cake{font-size:43px;display:block;margin-bottom:16px;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(2deg)}}
+.cover h1{
+  font:700 clamp(75px,15vw,125px)/.78 "Caveat",cursive;color:var(--deep);
+}
+.cover .sub{
+  margin-top:25px;font:25px "Caveat",cursive;color:var(--rose);
+}
+
+/* ---------- PAGE 2 ---------- */
+.bio-page{background:#f8f2e5}
+.bio-title{
+  font:500 clamp(38px,7vw,65px)/1 "Playfair Display",serif;color:var(--deep);
+}
+.bio-title em{color:var(--green)}
+.bio-copy{
+  margin-top:24px;font:21px/1.5 "Caveat",cursive;color:var(--brown);
+}
+.specimens{
+  display:flex;justify-content:center;gap:25px;margin:30px 0 0;
+  color:var(--green);font-size:30px;
+}
+
+/* ---------- PAGE 3 ---------- */
+.scene-page{background:#f5eedf}
+.scene-title{font:28px "Caveat",cursive;color:var(--green)}
+.scene-caption{font-size:11px;color:#9a917e;margin-top:3px}
+.scene{
+  width:min(650px,100%);height:385px;position:relative;margin:3px auto 0;
+}
+.character{position:absolute;width:220px;height:340px;left:50%;bottom:0;transform:translateX(-50%)}
+.character svg{width:100%;height:100%}
+
+.balloon{
+  position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font:500 40px "Playfair Display",serif;z-index:2;
+}
+.balloon23{
+  width:94px;height:114px;left:7%;top:90px;color:#fff;
+  background:radial-gradient(circle at 30% 21%,rgba(255,255,255,.7) 0 6px,transparent 7px),#527c59;
+  box-shadow:5px 10px 20px rgba(50,80,55,.12);
+}
+.balloon23:after{
+  content:"";position:absolute;top:105px;width:1px;height:126px;background:#777d73;
+}
+.balloon22{
+  width:82px;height:100px;right:7%;top:26px;color:#687167;
+  background:radial-gradient(circle at 30% 21%,rgba(255,255,255,.75) 0 5px,transparent 6px),#d0d2ca;
+  border:1px solid #afb4aa;
+  animation:oldBalloon 5.8s ease-in-out infinite;
+}
+.balloon22:after{
+  content:"";position:absolute;top:92px;width:1px;height:115px;background:#777d73;
+}
+@keyframes oldBalloon{
+  0%,10%{transform:translate(0,0) rotate(-3deg);opacity:1}
+  38%{transform:translate(18px,-18px) rotate(4deg);opacity:1}
+  100%{transform:translate(125px,-195px) rotate(14deg);opacity:0}
+}
+.bye{
+  position:absolute;right:0;top:125px;font:29px "Caveat",cursive;color:var(--green);
+  animation:bye 1.4s ease-in-out infinite alternate;
+}
+@keyframes bye{to{transform:translateY(-5px) rotate(-4deg)}}
+.wave{transform-origin:178px 165px;animation:wave .65s ease-in-out infinite alternate}
+@keyframes wave{to{transform:rotate(12deg)}}
+
+/* ---------- PAGE 4 ---------- */
+.message-page{background:var(--paper)}
+.message-title{font:34px "Caveat",cursive;color:var(--green);margin-bottom:24px}
+.poem{
+  max-width:580px;margin:auto;text-align:left;
+  font:clamp(16px,3.4vw,20px)/1.7 "Playfair Display",serif;color:#596259;
+}
+.poem p{margin-bottom:18px}.poem strong{color:var(--deep)}.heart{color:var(--rose);font-size:27px}
+
+/* ---------- PAGE 5 ---------- */
+.final-page{
+  background:radial-gradient(circle at center,#fffdf7 0,#f8f0df 100%);
+}
+.chapter{font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:20px}
+.final-title{
+  font:500 clamp(45px,9vw,78px)/.94 "Playfair Display",serif;color:var(--deep);
+}
+.final-copy{
+  max-width:620px;margin:25px auto 0;
+  font:clamp(16px,3vw,20px)/1.65 "Playfair Display",serif;
+}
+.final-note{
+  margin-top:27px;font:clamp(22px,5vw,30px)/1.25 "Caveat",cursive;color:var(--green);
+}
+.growth{margin-top:24px;font-size:34px;letter-spacing:7px}
+
+/* ---------- CONFETTI ---------- */
+#confetti{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden}
+.confetti{position:absolute;top:-20px;width:7px;height:12px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:600px){
+ .content{width:87vw}.leaf{width:82px}
+ .scene{height:355px;width:120%;margin-left:-10%;transform:scale(.83);transform-origin:center}
+ .next-button{bottom:22px}.back-button{bottom:25px;left:17px}.page-count{right:17px;bottom:26px}
+ .poem{font-size:15.5px;line-height:1.55}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<div class="stage">
+<div class="book-shadow"></div>
+<div id="confetti"></div>
+
+<!-- PAGE 1 -->
+<div class="page page-cover fold-right" id="p1" style="z-index:5">
+ <div class="sheet cover">
+  <span class="corner" style="left:13%;top:17%">✦</span>
+  <span class="corner" style="right:14%;top:24%">✧</span>
+  <span class="corner" style="left:20%;bottom:18%">♡</span>
+  <div class="content">
+   <div class="eyebrow">✦ a little birthday surprise ✦</div>
+   <span class="tiny-cake">🎂</span>
+   <h1>For<br>Mazan</h1>
+   <div class="sub">a little story made just for you ♡</div>
+  </div>
+  <button class="next-button" onclick="go(1)">Open the birthday story&nbsp; →</button>
+  <div class="page-count">01 / 05</div>
+ </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page page-two fold-left" id="p2" style="z-index:4">
+ <div class="sheet bio-page">
+  <svg class="leaf" style="left:5%;top:12%;transform:rotate(-15deg)" viewBox="0 0 150 150">
+   <path d="M20 130 C50 90 80 60 125 25"/>
+   <ellipse cx="48" cy="94" rx="10" ry="24" transform="rotate(-45 48 94)"/>
+   <ellipse cx="69" cy="70" rx="10" ry="24" transform="rotate(35 69 70)"/>
+   <ellipse cx="93" cy="49" rx="10" ry="24" transform="rotate(-40 93 49)"/>
+  </svg>
+  <div class="content">
+   <div class="specimens">🧬　🌿　🔬</div>
+   <div class="bio-title">A biological<br><em>celebration</em></div>
+   <div class="bio-copy">Another trip around the sun — and another beautiful chapter begins.</div>
+  </div>
+  <button class="back-button" onclick="go(0)">← back</button>
+  <button class="next-button" onclick="go(2)">Turn the page&nbsp; →</button>
+  <div class="page-count">02 / 05</div>
+ </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page page-three fold-center" id="p3" style="z-index:3">
+ <div class="sheet scene-page">
+  <span class="corner" style="left:8%;top:16%">✦</span>
+  <span class="corner" style="right:9%;top:21%">♡</span>
+  <div class="content">
+   <div class="scene-title">A new age has entered the ecosystem ♡</div>
+   <div class="scene-caption">23 stays. 22 gets a gentle goodbye.</div>
+   <div class="scene">
+    <div class="balloon balloon23">23</div>
+    <div class="balloon balloon22">22</div>
+    <div class="bye">bye bye! 👋</div>
+    <div class="character">
+     <svg viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg">
+      <path d="M78 273 C70 292 70 316 76 330 L103 330 C108 307 105 290 101 273Z" fill="#29372e"/>
+      <path d="M119 273 C116 293 119 314 126 330 L153 330 C155 308 150 288 143 273Z" fill="#29372e"/>
+      <ellipse cx="87" cy="330" rx="32" ry="11" fill="#eee9dc" stroke="#39443b" stroke-width="3"/>
+      <ellipse cx="142" cy="330" rx="32" ry="11" fill="#eee9dc" stroke="#39443b" stroke-width="3"/>
+      <path d="M62 165 C45 178 41 222 46 266 C72 280 148 280 174 266 C178 220 174 178 157 165 C134 151 84 151 62 165Z" fill="#39704b" stroke="#28553a" stroke-width="4"/>
+      <path d="M91 164 L110 190 L129 164 L122 156 L98 156Z" fill="#f6f1e5"/>
+      <line x1="110" y1="185" x2="110" y2="268" stroke="#d7d0bd" stroke-width="3"/>
+      <path d="M97 129 L123 129 L126 167 L94 167Z" fill="#efbd99"/>
+      <ellipse cx="54" cy="94" rx="11" ry="19" fill="#edba95" stroke="#594033" stroke-width="2"/>
+      <ellipse cx="166" cy="94" rx="11" ry="19" fill="#edba95" stroke="#594033" stroke-width="2"/>
+      <ellipse cx="110" cy="91" rx="54" ry="61" fill="#f0c09a" stroke="#594033" stroke-width="3"/>
+      <path d="M59 75 C53 43 76 20 108 20 C143 20 168 42 162 76 C147 61 132 56 110 58 C88 60 73 63 59 75Z" fill="#2d2925"/>
+      <path d="M68 55 C78 33 91 25 108 23 M90 48 C103 30 121 25 137 31 M117 24 C138 29 151 41 158 55" fill="none" stroke="#463b33" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="87" cy="91" r="21" fill="rgba(255,255,255,.12)" stroke="#30332f" stroke-width="5"/>
+      <circle cx="133" cy="91" r="21" fill="rgba(255,255,255,.12)" stroke="#30332f" stroke-width="5"/>
+      <line x1="108" y1="91" x2="112" y2="91" stroke="#30332f" stroke-width="5"/>
+      <circle cx="87" cy="91" r="3.5" fill="#1d2921"/><circle cx="133" cy="91" r="3.5" fill="#1d2921"/>
+      <path d="M109 92 C105 104 108 108 116 108" fill="none" stroke="#a56f54" stroke-width="2"/>
+      <path d="M99 117 C107 124 116 124 124 117" fill="none" stroke="#8d504a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M62 179 C45 193 37 218 43 239 C47 253 59 254 67 242 L78 207Z" fill="#39704b" stroke="#28553a" stroke-width="4"/>
+      <g class="wave">
+       <path d="M157 180 C174 173 188 153 193 134 C197 120 210 122 213 136 C216 156 202 187 180 203Z" fill="#39704b" stroke="#28553a" stroke-width="4"/>
+       <path d="M193 136 C188 125 190 114 195 107 C198 103 202 105 203 110 L204 122 L208 103 C209 99 214 99 214 104 L212 123 L218 108 C220 104 224 106 223 111 L218 129 L226 121 C229 118 232 121 230 125 C226 135 217 143 207 146Z" fill="#f0c09a" stroke="#594033" stroke-width="2"/>
+      </g>
+     </svg>
+    </div>
+   </div>
+  </div>
+  <button class="back-button" onclick="go(1)">← back</button>
+  <button class="next-button" onclick="go(3)">Keep reading&nbsp; →</button>
+  <div class="page-count">03 / 05</div>
+ </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page page-four fold-up" id="p4" style="z-index:2">
+ <div class="sheet message-page">
+  <div class="content">
+   <div class="message-title">Sa panibagong taon ng buhay mo 🌷</div>
+   <div class="poem">
+    <p>Sa bawat araw na dumaraan,<br>sana'y may dahilan kang <strong>ngumiti.</strong></p>
+    <p>Sa bawat pangarap na iyong hahawakan,<br>sana'y lagi kang may lakas na <strong>magpatuloy.</strong></p>
+    <p>At sa panibagong taon ng iyong buhay,<br>sana'y mas maraming saya,<br>mas maraming alaala,<br>at mga sandaling tunay na <strong>mahalaga.</strong></p>
+    <p>Dahil karapat-dapat kang maging masaya. <span class="heart">♡</span></p>
+   </div>
+  </div>
+  <button class="back-button" onclick="go(2)">← back</button>
+  <button class="next-button" onclick="go(4)">One last page&nbsp; →</button>
+  <div class="page-count">04 / 05</div>
+ </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page page-five fold-right" id="p5" style="z-index:1">
+ <div class="sheet final-page">
+  <span class="corner" style="left:13%;top:17%">✦</span><span class="corner" style="right:13%;top:24%">✧</span>
+  <div class="content">
+   <div class="chapter">Chapter 23 • New Growth</div>
+   <div class="final-title">Happy Birthday,<br>Almazan! ♡</div>
+   <div class="final-copy">May your 23rd year grow like a healthy ecosystem—full of life, discovery, good people, and moments worth remembering.</div>
+   <div class="final-note">Sana ang araw na ito ay maging<br>kasing-ganda ng mga ngiting<br>ibinibigay mo sa iba.</div>
+   <div class="growth">🌱　🦋　🌿</div>
+  </div>
+  <button class="back-button" onclick="go(3)">← back</button>
+  <div class="page-count">05 / 05</div>
+ </div>
+</div>
+
+<script>
+const pages=[...document.querySelectorAll(".page")];
+let current=0;
+let busy=false;
+
+function go(target){
+ if(busy || target<0 || target>=pages.length || target===current)return;
+ busy=true;
+ const forward=target>current;
+
+ if(forward){
+   for(let i=current;i<target;i++) pages[i].classList.add("flipped");
+ }else{
+   for(let i=current-1;i>=target;i--) pages[i].classList.remove("flipped");
+ }
+
+ current=target;
+ setTimeout(()=>{
+   busy=false;
+   if(current===4) confetti(100);
+ },1100);
+}
+
+let sx=0,sy=0;
+document.addEventListener("touchstart",e=>{
+ sx=e.changedTouches[0].clientX;sy=e.changedTouches[0].clientY;
+},{passive:true});
+document.addEventListener("touchend",e=>{
+ const dx=e.changedTouches[0].clientX-sx;
+ const dy=e.changedTouches[0].clientY-sy;
+ if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)){
+   if(dx<0) go(current+1); else go(current-1);
+ }
+},{passive:true});
+
+document.addEventListener("keydown",e=>{
+ if(["ArrowRight","ArrowDown"].includes(e.key))go(current+1);
+ if(["ArrowLeft","ArrowUp"].includes(e.key))go(current-1);
+});
+
+const colors=["#426b4c","#91a58d","#c6a967","#c88e8e","#dce6d7","#806e58"];
+function confetti(n){
+ const box=document.getElementById("confetti");
+ for(let i=0;i<n;i++){
+   const p=document.createElement("i");
+   p.className="confetti";
+   p.style.left=Math.random()*100+"vw";
+   p.style.background=colors[Math.floor(Math.random()*colors.length)];
+   p.style.animationDuration=(2.8+Math.random()*2.7)+"s";
+   p.style.animationDelay=Math.random()*.35+"s";
+   if(Math.random()>.5)p.style.borderRadius="50%";
+   box.appendChild(p);
+   setTimeout(()=>p.remove(),6000);
+ }
+}
+</script>
+</body>
+</html>
